@@ -25,12 +25,27 @@ export default {
       xs: "480px",
     },
     extend: {
+      fontFamily: {
+        logo: ["Red Hat Display"],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
+        acpurple: "#7B61FF",
+        acblue: "#26A4FF",
+        acred: "#FF6550",
+        acgreen: "#56CDAD",
+        acyellow: "#FFB836",
+        neutrals100: "#25324B",
+        neutrals80: "#515B6F",
+        neutrals60: "#7C8493",
+        neutrals40: "#A8ADB7",
+        neutrals20: "#E4E5E7",
+        neutrals10: "#F9FAFC",
+        neutrals0: "#F8F8FD",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
