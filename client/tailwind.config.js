@@ -25,6 +25,10 @@ export default {
       xs: "480px",
     },
     extend: {
+      boxShadow: {
+        custom:
+          "0px 79px 128px 0px rgba(192, 192, 192, 0.09), 0px 28.836px 46.722px 0px rgba(192, 192, 192, 0.06), 0px 13.999px 22.683px 0px rgba(192, 192, 192, 0.05), 0px 6.863px 11.119px 0px rgba(192, 192, 192, 0.04), 0px 2.714px 4.397px 0px rgba(192, 192, 192, 0.03)",
+      },
       fontFamily: {
         logo: ["Red Hat Display"],
       },
