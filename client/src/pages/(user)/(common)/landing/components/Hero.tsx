@@ -1,10 +1,10 @@
 import { Search } from "@/components/search";
 import Underline from "@/assets/images/underline.svg";
 
-const Hero = () => {
+export const Hero = () => {
   return (
     <div className="bg-neutrals0">
-      <div className="container py-[82px] px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24">
+      <div className="container py-8 sm:py-12 md:py-[82px]">
         <div className="w-full md:w-[533px]">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-[110%] text-neutrals100">
             Discover more than <span className="text-acblue">5000+ Jobs</span>
@@ -21,7 +21,7 @@ const Hero = () => {
         </div>
         <Search />
         <p className="mt-4 text-sm sm:text-base text-neutrals80 font-medium leading-[160%]">
-          Popular:
+          Popular :
           <span className="font-semibold">
             {" "}
             UI Designer, UX Researcher, Android, Admin
@@ -31,5 +31,3 @@ const Hero = () => {
     </div>
   );
 };
-
-export default Hero;
