@@ -1,9 +1,11 @@
-import { Navbar } from "../../../../components/navbar";
+import { Navbar } from "@/components/navbar";
+import Hero from "./components/Hero";
 
 const LandingPage = () => {
   return (
-    <div className="container">
+    <div>
       <Navbar />
+      <Hero />
     </div>
   );
 };
