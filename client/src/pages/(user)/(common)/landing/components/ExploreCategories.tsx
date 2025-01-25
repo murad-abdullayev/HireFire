@@ -21,7 +21,7 @@ import ArrowLeftWhite from "@/assets/icons/arrow-left white.svg";
 
 export const ExploreCategories = () => {
   return (
-    <div className="container py-[72px] px-4 sm:px-6 md:px-8">
+    <div className="container py-[72px]">
       <div className="flex justify-between items-center mb-8 sm:mb-12">
         <h2 className="text-[24px] sm:text-[28px] md:text-[32px] lg:text-[40px] font-semibold leading-[110%] text-neutrals100">
           Explore by <span className="text-acblue">category</span>

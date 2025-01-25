@@ -10,7 +10,7 @@ export const Navbar = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const controlNavbar = useCallback(() => {
-    if (window.scrollY > lastScrollY && window.scrollY > 100) {
+    if (window.scrollY > lastScrollY && window.scrollY > 85) {
       setIsVisible(false);
     } else {
       setIsVisible(true);
@@ -33,13 +33,13 @@ export const Navbar = () => {
         }`}
       >
         <div className="container py-[14px] flex items-center justify-between">
-          <div className="flex items-center gap-12">
+          <div className="flex items-center gap-8 md:gap-12">
             <Logo />
-            <ul className="hidden sm:flex gap-8 items-center relative">
+            <ul className="hidden sm:flex gap-2 md:gap-4 lg:gap-8 items-center relative">
               <li className="relative group">
                 <Link
                   to={paths.LANDING.JOBS.MAIN}
-                  className="block px-4 py-2 text-neutrals80 text-sm md:text-base font-medium leading-[160%] group-hover:text-primary transition"
+                  className="block px-2 md:px-3 py-2 text-neutrals80 text-sm md:text-base font-medium leading-[160%] group-hover:text-primary transition"
                 >
                   Find Jobs
                 </Link>
@@ -48,7 +48,7 @@ export const Navbar = () => {
               <li className="relative group">
                 <Link
                   to={paths.LANDING.COMPANIES.MAIN}
-                  className="block px-4 py-2 text-neutrals80 text-sm md:text-base font-medium leading-[160%] group-hover:text-primary transition"
+                  className="block px-2 md:px-3 py-2 text-neutrals80 text-sm md:text-base font-medium leading-[160%] group-hover:text-primary transition"
                 >
                   Browse Companies
                 </Link>
