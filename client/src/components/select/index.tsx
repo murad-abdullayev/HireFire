@@ -7,11 +7,27 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 
-export function SelectInput() {
+export function SelectInput({
+  widthFull,
+  sortVariant,
+}: {
+  widthFull?: boolean;
+  sortVariant?: boolean;
+}) {
   return (
     <Select>
-      <SelectTrigger className="w-full md:w-[180px]">
+      <SelectTrigger
+        sortVariant={sortVariant}
+        className={cn(
+          widthFull
+            ? "w-full"
+            : sortVariant
+            ? "w-full md:w-[135px]"
+            : "w-full md:w-[180px]"
+        )}
+      >
         <SelectValue placeholder="Select a fruit" />
       </SelectTrigger>
       <SelectContent>

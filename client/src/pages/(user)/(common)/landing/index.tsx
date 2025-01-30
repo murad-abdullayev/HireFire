@@ -8,7 +8,7 @@ import { LatestJobs } from "./components/LatestJobs";
 import { Footer } from "@/components/footer";
 
 const LandingPage = () => (
-  <div>
+  <>
     <Navbar />
     <Hero />
     <Companies />
@@ -17,7 +17,7 @@ const LandingPage = () => (
     <FeaturedJobs />
     <LatestJobs />
     <Footer />
-  </div>
+  </>
 );
 
 export default LandingPage;

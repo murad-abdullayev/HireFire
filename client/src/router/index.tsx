@@ -25,12 +25,23 @@ import { createBrowserRouter } from "react-router-dom";
 // import AdminDashboardPage from "./pages/admin/Dashboard";
 import { paths } from "../constants/paths";
 import LandingPage from "../pages/(user)/(common)/landing";
+import FindJobs from "@/pages/(user)/(common)/find-jobs";
+import BrowseCompanies from "@/pages/(user)/(common)/browse-companies";
 
 export const router = createBrowserRouter([
   {
     path: paths.LANDING.MAIN,
     element: <LandingPage />,
   },
+  {
+    path: paths.LANDING.JOBS.MAIN,
+    element: <FindJobs />,
+  },
+  {
+    path: paths.LANDING.COMPANIES.MAIN,
+    element: <BrowseCompanies />,
+  },
+
   //   {
   //     path: paths.LANDING.MAIN,
   //     element: <RootLayout />,

@@ -120,7 +120,7 @@ export const LatestJobs = () => {
           {jobs.map((job) => (
             <div
               key={job.id}
-              className="flex flex-col md:flex-row items-start gap-6 py-6 px-6 sm:px-10 bg-white rounded-lg shadow-md"
+              className="flex flex-col md:flex-row items-start gap-6 py-6 px-6 sm:px-10 bg-white border border-neutrals20"
             >
               <img className="w-16 h-16" src={NomadLogo} alt="nomad-logo" />
               <div>
