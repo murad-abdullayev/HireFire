@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import ArrowLeft from "@/assets/icons/arrow-left.svg";
-import NomadLogo from "@/assets/images/Company Logo.png";
+import NomadLogo from "@/assets/images/CompanyLogo.png";
 import CircleIcon from "@/assets/icons/circle-icon.svg";
 
 type Job = {

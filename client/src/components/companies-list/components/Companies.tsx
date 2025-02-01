@@ -1,13 +1,11 @@
 import { SelectInput } from "@/components/select";
-import NomadLogo from "@/assets/images/CompanyLogo.png";
+import CompanyLogo from "@/assets/images/CompanyLogo.png";
 import CircleIcon from "@/assets/icons/circle-icon.svg";
 import TableViewGrey from "@/assets/icons/tab-view-grey.svg";
 import TableViewPrimary from "@/assets/icons/tab-view-primary.svg";
 import SquareViewGrey from "@/assets/icons/square-view-grey.svg";
 import SquareViewPrimary from "@/assets/icons/square-view-primary.svg";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import { useListStore } from "@/store/useJobListStore";
 import { useEffect, useState } from "react";
 import {
@@ -19,14 +17,15 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { jobs } from "./JobsArray";
+import { companies } from "./CompaniesArray";
+import { Button } from "@/components/ui/button";
 
-const categoryColors: Record<string, string> = {
-  Marketing: "border-acyellow text-acyellow",
-  Design: "border-acpurple text-acpurple",
-  Engineering: "border-acgreen text-acgreen",
+const industryColors: Record<string, string> = {
   Business: "border-acblue text-acblue",
-  Technology: "border-acpurple text-acpurple",
+  Blockchain: "border-acpurple text-acpurple",
+  Hosting: "border-acgreen text-acgreen",
+  Fintech: "border-acred text-acred",
+  Education: "border-acyellow text-acyellow",
 };
 
 const predefinedColors = [
@@ -37,22 +36,16 @@ const predefinedColors = [
   "border-acblue text-acblue",
 ];
 
-const jobTypeColors: Record<string, string> = {
-  "Full-time": "text-acgreen bg-acgreen/10",
-  Internship: "text-acred bg-acred/10",
-  "Part-time": "text-acyellow bg-acyellow/10",
-};
-
-const getCategoryColor = (category: string): string => {
-  if (categoryColors[category]) {
-    return categoryColors[category];
+const getIndustryColor = (industry: string): string => {
+  if (industryColors[industry]) {
+    return industryColors[industry];
   }
   const randomIndex = Math.floor(Math.random() * predefinedColors.length);
   return predefinedColors[randomIndex];
 };
 
-const Jobs = () => {
-  const { jobViewMode, setJobViewMode } = useListStore();
+const Companies = () => {
+  const { companyViewMode, setCompanyViewMode } = useListStore();
   const [isMdScreen, setIsMdScreen] = useState(false);
 
   useEffect(() => {
@@ -65,20 +58,20 @@ const Jobs = () => {
   }, []);
 
   useEffect(() => {
-    if (isMdScreen && jobViewMode !== "square") {
-      setJobViewMode("square");
+    if (isMdScreen && companyViewMode !== "square") {
+      setCompanyViewMode("square");
     }
-  }, [isMdScreen, jobViewMode, setJobViewMode]);
+  }, [isMdScreen, companyViewMode, setCompanyViewMode]);
 
   return (
     <div className="flex flex-col gap-8">
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-1">
           <h3 className="text-2xl font-semibold leading-[120%] text-neutrals100">
-            All Jobs
+            All Companies
           </h3>
           <p className="text-base text-neutrals60 font-normal leading-[160%]">
-            Showing {jobs.length} results
+            Showing {companies.length} results
           </p>
         </div>
         <div className="flex items-center gap-[22px]">
@@ -93,25 +86,29 @@ const Jobs = () => {
             <button
               className={cn(
                 "p-2 rounded-sm transition-all duration-300",
-                jobViewMode === "table" ? "bg-primary/10" : ""
+                companyViewMode === "table" ? "bg-primary/10" : ""
               )}
-              onClick={() => setJobViewMode("table")}
+              onClick={() => setCompanyViewMode("table")}
             >
               <img
-                src={jobViewMode === "table" ? TableViewPrimary : TableViewGrey}
+                src={
+                  companyViewMode === "table" ? TableViewPrimary : TableViewGrey
+                }
                 alt="table-view"
               />
             </button>
             <button
               className={cn(
                 "p-2 rounded-sm transition-all duration-300",
-                jobViewMode === "square" ? "bg-primary/10" : ""
+                companyViewMode === "square" ? "bg-primary/10" : ""
               )}
-              onClick={() => setJobViewMode("square")}
+              onClick={() => setCompanyViewMode("square")}
             >
               <img
                 src={
-                  jobViewMode === "square" ? SquareViewPrimary : SquareViewGrey
+                  companyViewMode === "square"
+                    ? SquareViewPrimary
+                    : SquareViewGrey
                 }
                 alt="square-view"
               />
@@ -121,116 +118,92 @@ const Jobs = () => {
       </div>
 
       <div className="flex flex-col gap-4">
-        {jobViewMode === "table" ? (
-          jobs.map((job) => (
+        {companyViewMode === "table" ? (
+          companies.map((company) => (
             <div
-              key={job.id}
+              key={company.id}
               className="flex flex-col md:flex-row items-start gap-6 py-6 px-6 sm:px-10 justify-between bg-white border border-neutrals20"
             >
               <div className="flex flex-col md:flex-row gap-6">
-                <img className="w-16 h-16" src={NomadLogo} alt="nomad-logo" />
+                <img
+                  className="w-16 h-16"
+                  src={CompanyLogo}
+                  alt={`${company.name}-logo`}
+                />
                 <div>
                   <p className="text-neutrals100 text-lg font-semibold leading-[160%] mb-2">
-                    {job.title}
+                    {company.name}
                   </p>
                   <div className="flex items-center gap-2 mb-2">
                     <p className="text-base font-normal text-neutrals60 leading-[160%]">
-                      {job.company}
+                      {company.location}
                     </p>
                     <img src={CircleIcon} alt="circle-icon" />
                     <p className="text-base font-normal text-neutrals60 leading-[160%]">
-                      {job.location}
+                      {company.size}
                     </p>
                   </div>
                   <div className="flex flex-wrap items-center gap-2">
-                    <div
-                      className={`text-base font-semibold leading-[160%] rounded-[80px] px-4 py-1 ${
-                        jobTypeColors[job.type]
-                      }`}
-                    >
-                      {job.type}
-                    </div>
-                    <div className="w-[1px] h-[34px] mr-32 xl:mr-0 bg-neutrals20" />
-                    {job.categories.map((category, index) => (
+                    {company.industries.map((industry, index) => (
                       <div
                         key={index}
-                        className={`text-base font-semibold leading-[160%] rounded-[80px] px-4 py-1 border ${getCategoryColor(
-                          category
+                        className={`text-base font-semibold leading-[160%] rounded-[80px] px-4 py-1 border ${getIndustryColor(
+                          industry
                         )}`}
                       >
-                        {category}
+                        {industry}
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col gap-4">
-                <Button className="w-full">Apply</Button>
-                <div className="flex flex-col gap-2">
-                  <Progress value={(job.applied / job.capacity) * 100} />
-                  <p className="text-sm font-semibold text-neutrals100 leading-[160%]">
-                    {job.applied} applied{" "}
-                    <span className="font-normal text-neutrals60">
-                      of {job.capacity} capacity
-                    </span>
-                  </p>
-                </div>
+              <div className="flex flex-col gap-2">
+                <p className="text-sm font-normal text-neutrals80 leading-[160%]">
+                  {company.description}
+                </p>
+                <Button variant="outline" className="w-full">
+                  View Details
+                </Button>
               </div>
             </div>
           ))
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-8 gap-x-6">
-            {jobs.map((job) => (
+            {companies.map((company) => (
               <div
-                key={job.id}
+                key={company.id}
                 className="p-6 bg-white border border-neutrals20 flex flex-col gap-5"
               >
                 <div className="flex items-center justify-between w-full">
-                  <img className="w-16 h-16" src={NomadLogo} alt="nomad-logo" />
-                  <div
-                    className={`text-base font-semibold leading-[160%] rounded-[80px] px-4 py-1 ${
-                      jobTypeColors[job.type]
-                    }`}
-                  >
-                    {job.type}
-                  </div>
-                </div>
-                <div>
-                  <p className="text-neutrals100 text-lg font-semibold leading-[160%] mb-0.5">
-                    {job.title}
+                  <img
+                    className="w-16 h-16"
+                    src={CompanyLogo}
+                    alt={`${company.name}-logo`}
+                  />
+                  <p className="text-base font-semibold text-neutrals100">
+                    {company.size}
                   </p>
-                  <div className="flex items-center gap-2 mb-2">
-                    <p className="text-base font-normal text-neutrals60 leading-[160%]">
-                      {job.company}
-                    </p>
-                    <img src={CircleIcon} alt="circle-icon" />
-                    <p className="text-base font-normal text-neutrals60 leading-[160%]">
-                      {job.location}
-                    </p>
-                  </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  {job.categories.map((category, index) => (
+                <p className="text-lg font-semibold text-neutrals100">
+                  {company.name}
+                </p>
+                <p className="text-sm text-neutrals60">{company.location}</p>
+                <div className="flex flex-wrap items-center gap-2">
+                  {company.industries.map((industry, index) => (
                     <div
                       key={index}
-                      className={`text-base font-semibold leading-[160%] rounded-[80px] px-4 py-1 border ${getCategoryColor(
-                        category
+                      className={`text-base font-semibold leading-[160%] rounded-[80px] px-4 py-1 border ${getIndustryColor(
+                        industry
                       )}`}
                     >
-                      {category}
+                      {industry}
                     </div>
                   ))}
                 </div>
-                <div className="flex flex-col gap-2">
-                  <Progress value={(job.applied / job.capacity) * 100} />
-                  <p className="text-sm font-semibold text-neutrals100 leading-[160%]">
-                    {job.applied} applied{" "}
-                    <span className="font-normal text-neutrals60">
-                      of {job.capacity} capacity
-                    </span>
-                  </p>
-                </div>
-                <Button className="w-full">Apply</Button>
+                <p className="text-sm text-neutrals80">{company.description}</p>
+                <Button variant="outline" className="w-full">
+                  View Details
+                </Button>
               </div>
             ))}
           </div>
@@ -265,4 +238,4 @@ const Jobs = () => {
   );
 };
 
-export default Jobs;
+export default Companies;
