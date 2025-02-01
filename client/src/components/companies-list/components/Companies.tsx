@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/pagination";
 import { companies } from "./CompaniesArray";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const industryColors: Record<string, string> = {
   Business: "border-acblue text-acblue",
@@ -120,29 +121,74 @@ const Companies = () => {
       <div className="flex flex-col gap-4">
         {companyViewMode === "table" ? (
           companies.map((company) => (
-            <div
-              key={company.id}
-              className="flex flex-col md:flex-row items-start gap-6 py-6 px-6 sm:px-10 justify-between bg-white border border-neutrals20"
-            >
-              <div className="flex flex-col md:flex-row gap-6">
-                <img
-                  className="w-16 h-16"
-                  src={CompanyLogo}
-                  alt={`${company.name}-logo`}
-                />
-                <div>
-                  <p className="text-neutrals100 text-lg font-semibold leading-[160%] mb-2">
-                    {company.name}
-                  </p>
-                  <div className="flex items-center gap-2 mb-2">
-                    <p className="text-base font-normal text-neutrals60 leading-[160%]">
-                      {company.location}
+            <Link to={`/companies/${company.id}`} key={company.id}>
+              <div className="flex flex-col md:flex-row items-start gap-6 py-6 px-6 sm:px-10 justify-between bg-white border border-neutrals20">
+                <div className="flex flex-col md:flex-row gap-6">
+                  <img
+                    className="w-16 h-16"
+                    src={CompanyLogo}
+                    alt={`${company.name}-logo`}
+                  />
+                  <div>
+                    <p className="text-neutrals100 text-lg font-semibold leading-[160%] mb-2">
+                      {company.name}
                     </p>
-                    <img src={CircleIcon} alt="circle-icon" />
-                    <p className="text-base font-normal text-neutrals60 leading-[160%]">
+                    <div className="flex items-center gap-2 mb-2">
+                      <p className="text-base font-normal text-neutrals60 leading-[160%]">
+                        {company.location}
+                      </p>
+                      <img src={CircleIcon} alt="circle-icon" />
+                      <p className="text-base font-normal text-neutrals60 leading-[160%]">
+                        {company.size}
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      {company.industries.map((industry, index) => (
+                        <div
+                          key={index}
+                          className={`text-base font-semibold leading-[160%] rounded-[80px] px-4 py-1 border ${getIndustryColor(
+                            industry
+                          )}`}
+                        >
+                          {industry}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <p className="text-sm font-normal text-neutrals80 leading-[160%]">
+                    {company.description}
+                  </p>
+                  <Button variant="outline" className="w-full">
+                    View Details
+                  </Button>
+                </div>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-8 gap-x-6">
+            {companies.map((company) => (
+              <Link to={`/companies/${company.id}`} key={company.id}>
+                <div
+                  key={company.id}
+                  className="p-6 bg-white border border-neutrals20 flex flex-col gap-5"
+                >
+                  <div className="flex items-center justify-between w-full">
+                    <img
+                      className="w-16 h-16"
+                      src={CompanyLogo}
+                      alt={`${company.name}-logo`}
+                    />
+                    <p className="text-base font-semibold text-neutrals100">
                       {company.size}
                     </p>
                   </div>
+                  <p className="text-lg font-semibold text-neutrals100">
+                    {company.name}
+                  </p>
+                  <p className="text-sm text-neutrals60">{company.location}</p>
                   <div className="flex flex-wrap items-center gap-2">
                     {company.industries.map((industry, index) => (
                       <div
@@ -155,56 +201,14 @@ const Companies = () => {
                       </div>
                     ))}
                   </div>
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <p className="text-sm font-normal text-neutrals80 leading-[160%]">
-                  {company.description}
-                </p>
-                <Button variant="outline" className="w-full">
-                  View Details
-                </Button>
-              </div>
-            </div>
-          ))
-        ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-8 gap-x-6">
-            {companies.map((company) => (
-              <div
-                key={company.id}
-                className="p-6 bg-white border border-neutrals20 flex flex-col gap-5"
-              >
-                <div className="flex items-center justify-between w-full">
-                  <img
-                    className="w-16 h-16"
-                    src={CompanyLogo}
-                    alt={`${company.name}-logo`}
-                  />
-                  <p className="text-base font-semibold text-neutrals100">
-                    {company.size}
+                  <p className="text-sm text-neutrals80">
+                    {company.description}
                   </p>
+                  <Button variant="outline" className="w-full">
+                    View Details
+                  </Button>
                 </div>
-                <p className="text-lg font-semibold text-neutrals100">
-                  {company.name}
-                </p>
-                <p className="text-sm text-neutrals60">{company.location}</p>
-                <div className="flex flex-wrap items-center gap-2">
-                  {company.industries.map((industry, index) => (
-                    <div
-                      key={index}
-                      className={`text-base font-semibold leading-[160%] rounded-[80px] px-4 py-1 border ${getIndustryColor(
-                        industry
-                      )}`}
-                    >
-                      {industry}
-                    </div>
-                  ))}
-                </div>
-                <p className="text-sm text-neutrals80">{company.description}</p>
-                <Button variant="outline" className="w-full">
-                  View Details
-                </Button>
-              </div>
+              </Link>
             ))}
           </div>
         )}

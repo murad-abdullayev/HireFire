@@ -1,5 +1,3 @@
-import { Footer } from "@/components/footer";
-import { Navbar } from "@/components/navbar";
 import { FindDreamCompany } from "./components/FindDreamCompany";
 import { useLocation } from "react-router-dom";
 import { CompaniesList } from "@/components/companies-list";
@@ -12,10 +10,8 @@ const BrowseCompanies = () => {
 
   return (
     <>
-      <Navbar />
       <FindDreamCompany />
       {isSearching ? <CompaniesList /> : <CompaniesLanding />}
-      <Footer />
     </>
   );
 };
