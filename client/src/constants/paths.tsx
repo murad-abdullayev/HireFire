@@ -19,6 +19,9 @@ export const paths = {
       REGISTER: "/register/company",
       LOGIN: "/login/company",
     },
+    TEAM_MEMBER: {
+      REGISTER: (token = ":token") => `/team-member/register/${token}`,
+    },
   },
   APPLICANT_DASHBOARD: {
     MAIN: "/applicant",

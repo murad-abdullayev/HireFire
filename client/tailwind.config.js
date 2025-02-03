@@ -38,6 +38,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
+        acblack: "#202430",
         acpurple: "#7B61FF",
         acblue: "#26A4FF",
         acred: "#FF6550",
